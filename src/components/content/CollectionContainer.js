@@ -67,9 +67,6 @@ function CollectionContainer () {
             <div className="eAPuiF">
                 <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(270px, 1fr))",gridGap:"16px",width:"100%"}} >
                     {
-                        list && console.log(list)
-                    }
-                    {
                         list.map((item, index) => {
                             return <CollectionCard asset={item} key={index}/>
                         })

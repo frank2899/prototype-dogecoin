@@ -25,7 +25,8 @@ const OpenseaProvider = (props) => {
     )
   
     const [asset, setAsset] = useState(null)
-  
+    const [order, setOrder] = useState(null)
+
     // Get NFT Asset Data
     const getAsset = async() => {
       const asset = await Moralis.Plugins.opensea.getAsset({
@@ -36,6 +37,7 @@ const OpenseaProvider = (props) => {
   
       setAsset(asset)
       console.log(asset)
+      console.log(order)
     }
   
     // get NFT orders
@@ -49,6 +51,7 @@ const OpenseaProvider = (props) => {
       });
   
       console.log(order)
+      setOrder(order)
     }
   
     // Create sell orders for an NFT
@@ -75,6 +78,7 @@ const OpenseaProvider = (props) => {
     // Create Buy order
     const createBuyOrder = async() => {
       if(!asset) return alert("You must select an asset!")
+      if(!isAuthenticated) return authenticate()
       try{
         const buyOrder = await Moralis.Plugins.opensea.createBuyOrder({
           network: 'testnet',
@@ -94,17 +98,19 @@ const OpenseaProvider = (props) => {
     }
   
     useEffect(() => {
-      if(isInitialized){
-        Moralis.initPlugins()
-        console.log("Initialized!")
-        setStatusPlugin(true)
-      }
-      else if(isInitializing){
-        console.log("Waiting...")
-      }
-      else{
-        console.log("Failed to initialized")
-      }
+      (async() => {
+        if(isInitialized){
+          await Moralis.initPlugins()
+          console.log("Initialized!")
+          setStatusPlugin(true)
+        }
+        else if(isInitializing){
+          console.log("Waiting...")
+        }
+        else{
+          console.log("Failed to initialized")
+        }
+      })()
     },[isInitialized])
   
     useEffect(() => {
@@ -118,6 +124,7 @@ const OpenseaProvider = (props) => {
         <OpenseaContext.Provider value={{
             asset,
             values,
+            order,
             isAuthenticated,
             web3Account,
             isPluginInstalled,

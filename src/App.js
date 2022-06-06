@@ -17,17 +17,17 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={
-              <CollectionProvider>
+              // <CollectionProvider>
                 <AssetsProvider>
                   <main id="main" className="eHrogu jYqxGr ksFzlZ">
                     <div className="iYvtHI jYqxGr ksFzlZ" height="100%">
-                      <HeroBanner/>
-                      <Tabs/>
+                      {/* <HeroBanner/> */}
+                      {/* <Tabs/> */}
                       <Content/>
                     </div>
                   </main>
                 </AssetsProvider>
-              </CollectionProvider>
+              // </CollectionProvider>
             }/>
             
             <Route path="/:assetId/:tokenId" element={
