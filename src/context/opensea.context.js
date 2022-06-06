@@ -10,13 +10,14 @@ const OpenseaProvider = (props) => {
         logout, 
         authenticate, 
         enableWeb3, 
-        isInitialized, 
+        isInitialized,
         isInitializing, 
         isAuthenticated, 
         isWeb3Enabled 
     } = useMoralis()
   
     const [values, setValues] = useState({tokenAddress : "", tokenId : ""})
+    const [isPluginInstalled, setStatusPlugin] = useState(false)
 
     const web3Account = useMemo(
       () => isAuthenticated && user.get("accounts")[0],
@@ -80,7 +81,7 @@ const OpenseaProvider = (props) => {
           tokenAddress: values.tokenAddress,
           tokenId: values.tokenId,
           tokenType: asset.assetContract.schemaName,
-          amount: 0.0001,
+          amount: 0.0001, // make it dynamic
           userAddress: web3Account,
           paymentTokenAddress: '0xc778417e063141139fce010982780140aa0cd5ab',
         });
@@ -96,6 +97,7 @@ const OpenseaProvider = (props) => {
       if(isInitialized){
         Moralis.initPlugins()
         console.log("Initialized!")
+        setStatusPlugin(true)
       }
       else if(isInitializing){
         console.log("Waiting...")
@@ -118,6 +120,7 @@ const OpenseaProvider = (props) => {
             values,
             isAuthenticated,
             web3Account,
+            isPluginInstalled,
             getOrder,
             getAsset,
             createSellOrder,
