@@ -31,12 +31,12 @@ function Details () {
     },[assetId,tokenId])
 
     useEffect(() => {
-      (async() => {
-        if(values.tokenAddress && values.tokenId && isPluginInstalled){
+      const _ = async() => {
           await getOrder()
           getAsset()
-        }
-      })()
+      }
+      if(values.tokenAddress && values.tokenId && isPluginInstalled) _()
+
     },[values,isPluginInstalled])
 
     function timeSince(date) {
@@ -404,7 +404,7 @@ function Details () {
 
                 <div className="card--container mb-4 hYKIws">
                   {
-                    (order && order?.orders?.count) ? 
+                    !(order?.orders.length) ? 
                     <>
                     <div className="item--frame">
                       <div className="sc-o1vm2f-2 huRwzY">
