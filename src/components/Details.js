@@ -384,7 +384,7 @@ function Details () {
                       <div className="elqhCm fkuTPI AccountLink--ellipsis-overflow">
                         Owned by&nbsp;
                         <a className="hubhNL laCjUo AccountLink--ellipsis-overflow" href="/">
-                          <span>{asset.owner.user.username || "Null"}</span>
+                          <span>{asset.owner?.user || (asset.owner?.username || "Null")}</span>
                         </a>
                       </div>
                     </div>
