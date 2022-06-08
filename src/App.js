@@ -7,6 +7,7 @@ import HeroBanner from './components/HeroBanner'
 import Tabs from './components/Tabs'
 import Content from './components/Content'
 import Details from './components/Details'
+import Sell from './components/Sell'
 
 function App() {
 
@@ -31,10 +32,14 @@ function App() {
             }/>
             
             <Route path="/:assetId/:tokenId" element={
-                <OpenseaProvider>
-                  <Details/>
-                </OpenseaProvider>
-              }/>
+              <OpenseaProvider>
+                <Details/>
+              </OpenseaProvider>
+            }/>
+
+            <Route path="/sell/:assetId/:tokenId" element={
+              <Sell/>
+            }></Route>
           </Routes>
         </Router>
       </div>

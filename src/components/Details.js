@@ -23,6 +23,12 @@ function Details () {
       logout, 
       authenticate, 
     } = useContext(OpenseaContext)
+    
+    const handleOrder = async () => {
+      await createBuyOrder()
+      await getOrder()
+      await getAsset()
+    }
 
     useEffect(() => {
       setValues({tokenAddress : assetId, tokenId})
@@ -68,27 +74,82 @@ function Details () {
     }
     
     return <>
-      {/* {listing && console.warn(listing)} */}
-
       {
         asset ? <>
-      <div className="container">
-        <div className="text-center mb-5"><small className="text-muted">Most of the output are in console</small></div>
-        <h5>
-          Asset Owner Address : {asset.owner.address}
-        </h5>
-        <h5>
-          Your Address : {web3Account || "Not logged"}
-        </h5>
-        <p className="text-muted">{web3Account === asset.owner.address ? "This asset is yours 'sell order' is enabled" : "This asset is not yours. 'sell order' is disabled"}</p>
-        <div className="d-flex justify-content-center">
-            {isAuthenticated && <>
-              <button className="btn me-3 btn-light shadow mt-5" onClick={createSellOrder}
-              disabled={web3Account === asset.owner.address ? false : true}>Create Sell Order</button>
-            </>}
+      <div className="bg-light p-3 mb-4">
+        <div className="container d-flex justify-content-end">
+          <Link to={"/sell/"+assetId+"/"+tokenId} className="btn btn-primary px-5 py-3 fs-5 fw-bolder"
+          disabled={web3Account === asset.owner.address ? false : true}>
+            Sell
+          </Link>
         </div>
       </div>
-
+      <div className="modal fade" id="createOrderModal" tabindex="-1" aria-labelledby="createOrderModal" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-body">
+              <header className="sc-1xf18x6-0 sc-xyql9f-3 eimawt cmYDzE">
+                <h4 className="sc-1xf18x6-0 sc-1w94ul3-0 sc-xyql9f-5 haVRLx bjsuxj emRahP text-center">Place a bid</h4>
+              </header>
+              <section className="sc-1xf18x6-0 sc-xyql9f-2 jpQsNF NmbCx">
+                <div className="sc-1xf18x6-0 sc-1twd32i-0 sc-1wwz3hp-0 haVRLx kKpYwv kuGBEl sc-1fkdq1o-1 UPKyL">
+                  <div className="sc-1xf18x6-0 sc-1twd32i-0 jvONNN kKpYwv">
+                    <div className="sc-1xf18x6-0 sc-1twd32i-0 sc-1wwz3hp-0 gfbErs kKpYwv kuGBEl">
+                      <label className="sc-1xf18x6-0 sc-1w94ul3-0 sc-5y2dd1-0 haVRLx jnCfKq EDtcj">Price</label>
+                    </div>
+                    <div className="sc-1m1dfwq-0 eNinak">
+                      <div className="sc-8qscmp-0 jVimYV">
+                        <div className="sc-17icy78-0 klcZh Input--valid">
+                          <div className="Input--main input-group">
+                            <div className="Input--label Input--left-label input-group-text">
+                              <div className="sc-1xf18x6-0 sc-1twd32i-0 haVRLx kKpYwv PaymentTokenInputV2--payment-asset PaymentTokenInputV2--input-left">
+                                <div className="sc-1xf18x6-0 sc-1twd32i-0 sc-12mizad-0 iQOhGx kKpYwv">
+                                  <div size="24" className="sc-1xf18x6-0 sc-1twd32i-0 sc-1wwz3hp-0 sc-b4hiel-0 sc-cjf6mn-0 sc-sbw25j-0 sc-s8gv83-0 fhVUfN kKpYwv kuGBEl iVtKaT euUQqP jwEsBT bLwasA">
+                                    <img alt="" src="https://openseauserdata.com/files/accae6b6fb3888cbff27a013729c22dc.svg" size="18" className="sc-1xf18x6-0 sc-sbw25j-1 fhVUfN kGXfai"/>
+                                  </div>
+                                </div>
+                                <div className="sc-1xf18x6-0 sc-1twd32i-0 sc-1wwz3hp-0 sc-b4hiel-0 sc-1idymv7-1 haVRLx kKpYwv kuGBEl iVtKaT cjftsJ">
+                                  <span fontSize="14px" className="sc-1xf18x6-0 sc-1w94ul3-0 sc-1idymv7-2 hyzwIu iqOLSY">WETH</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="Input--prefix"></div>
+                            <input autocapitalize="off" autocomplete="off" autocorrect="off" className="browser-default Input--input" data-testid="Input" inputmode="decimal" placeholder="Amount" required="" spellcheck="false" type="text" />
+                              <div className="Input--label Input--right-label input-group-text">
+                                <div className="sc-1xf18x6-0 sc-1w94ul3-0 cTvSkV jIeJKA PaymentTokenInputV2--price-display PaymentTokenInputV2--input-right">$0.00</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="sc-1xf18x6-0 sc-1twd32i-0 sc-jjxyhg-0 cpiPas kKpYwv gakOkv">
+                      <span display="flex" className="sc-1xf18x6-0 sc-1w94ul3-0 sc-13us3ky-0 jUxJqB sZAwe gYhERy"></span>
+                      <span className="sc-1xf18x6-0 sc-1w94ul3-0 sc-13us3ky-0 elFyTS sZAwe gYhERy">Available: 0.0000 WETH</span>
+                    </div>
+                  </div>
+                  <div className="sc-11it458-0 iRtaPJ">
+                    <div className="AcknowledgementCheckboxes--tos-row">
+                      <span className="sc-zw7s59-3 dICFpI AcknowledgementCheckboxes--tos-row-checkbox" type="checkbox">
+                        <input type="checkbox" id="tos" name="tos" className="sc-zw7s59-1 hjgjTV"/>
+                      </span>
+                      <label className="sc-1xf18x6-0 sc-1w94ul3-0 haVRLx esBwvv AcknowledgementCheckboxes--tos-text" htmlFor="tos">I agree to OpenSea's 
+                        <a target="_blank" href="/tos" className="sc-1pie21o-0 elyzfO">Terms of Service</a>
+                      </label>
+                    </div>
+                  </div>
+                </section>
+                <footer className="sc-1xf18x6-0 sc-xyql9f-4 emEEkd dQZvCL">
+                  <div>
+                    <button width="100%" disabled="" type="button" className="sc-1xf18x6-0 sc-glfma3-0 jPlHEK jzlogA">Place Bid</button>
+                  </div>
+                </footer>
+                {/* <div className="sc-1xf18x6-0 sc-1twd32i-0 kZfJst kKpYwv">
+                  <button type="button" className="sc-ty1bh0-0 infdiL"><i aria-label="Close" value="close" size="24" className="sc-1gugx8q-0 sc-xyql9f-1 fTdhIH gLyxZv material-icons">close</i></button></div> */}
+            </div>
+          </div>
+        </div>
+      </div>
       <main className="py-5">
         <section>
           <div className="container">
@@ -384,7 +445,7 @@ function Details () {
                       <div className="elqhCm fkuTPI AccountLink--ellipsis-overflow">
                         Owned by&nbsp;
                         <a className="hubhNL laCjUo AccountLink--ellipsis-overflow" href="/">
-                          <span>{asset.owner?.user || (asset.owner?.username || "Null")}</span>
+                          <span>{asset.owner?.user?.username || "Null"}</span>
                         </a>
                       </div>
                     </div>
@@ -412,7 +473,7 @@ function Details () {
                             <div className="TradeStation--main">
                                 <div className="sc-1xf18x6-0 hDbqle">
                                   <div width="100%,100%,100%,50%" className="sc-1xf18x6-0 sc-9jbsog-0 igRgty iyyTkb">
-                                      <button onClick={createBuyOrder} width="100%" type="button" className="sc-1xf18x6-0 sc-glfma3-0 bUHoWN iACHcE">
+                                      <button data-bs-toggle="modal" data-bs-target="#createOrderModal" width="100%" type="button" className="sc-1xf18x6-0 sc-glfma3-0 bUHoWN iACHcE">
                                         <div aria-hidden="true" className="sc-1xf18x6-0 sc-1twd32i-0 gNHYAf kKpYwv"><i value="local_offer" size="24" className="sc-1gugx8q-0 fTdhIH material-icons">local_offer</i></div>
                                         Make offer
                                       </button>
@@ -447,7 +508,7 @@ function Details () {
                       <div display="block,block,block,flex" className="cVpiON">
                         <div className="elqhCm" style={{width: "100%", display: "contents"}}>
                           <div width="[object Object]" className="InlineFlexreact__InlineFlex-sc-9jbsog-0 dFJJZm czWSvr">
-                            <button type="button" onClick={createBuyOrder} className="dpXlkZ fzwDgL">
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#createOrderModal" className="dpXlkZ fzwDgL">
                               <div aria-hidden="true" className="fOxaJL jYqxGr"><i value="account_balance_wallet" size="24"
                                   className="dVAVbi material-icons">account_balance_wallet</i>
                               </div>Place bid

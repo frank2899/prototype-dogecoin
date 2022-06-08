@@ -37,7 +37,7 @@ function CollectionContainer () {
     }, []);
 
     useEffect(() => {
-        if(asset) {
+        if(asset?.assets) {
             // if(searchParams.getAll('filter').length){
             //     // setList( old => [...old,...handleFilter()])
             //     // console.log(handleFilter())
@@ -67,7 +67,7 @@ function CollectionContainer () {
             <div className="eAPuiF">
                 <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(270px, 1fr))",gridGap:"16px",width:"100%"}} >
                     {
-                        list.map((item, index) => {
+                        list?.map((item, index) => {
                             return <CollectionCard asset={item} key={index}/>
                         })
                     }

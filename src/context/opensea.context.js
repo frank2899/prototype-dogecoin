@@ -41,7 +41,8 @@ const OpenseaProvider = (props) => {
     }
   
     // get NFT orders
-    const getOrder = async() => {
+    const getOrder = async(amount) => {
+      if(!amount) return "Amount is required."
       const order = await Moralis.Plugins.opensea.getOrders({
         network: 'testnet',
         tokenAddress: values.tokenAddress,
