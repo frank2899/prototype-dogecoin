@@ -41,8 +41,7 @@ const OpenseaProvider = (props) => {
     }
   
     // get NFT orders
-    const getOrder = async(amount) => {
-      if(!amount) return "Amount is required."
+    const getOrder = async() => {
       const order = await Moralis.Plugins.opensea.getOrders({
         network: 'testnet',
         tokenAddress: values.tokenAddress,
@@ -77,7 +76,8 @@ const OpenseaProvider = (props) => {
     }
   
     // Create Buy order
-    const createBuyOrder = async() => {
+    const createBuyOrder = async(amount) => {
+      if(!amount) return "Amount is required."
       if(!asset) return alert("You must select an asset!")
       if(!isAuthenticated) return authenticate()
       try{
@@ -86,7 +86,7 @@ const OpenseaProvider = (props) => {
           tokenAddress: values.tokenAddress,
           tokenId: values.tokenId,
           tokenType: asset.assetContract.schemaName,
-          amount: 0.0001, // make it dynamic
+          amount,
           userAddress: web3Account,
           paymentTokenAddress: '0xc778417e063141139fce010982780140aa0cd5ab',
         });

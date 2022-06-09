@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 // import {AssetsContext} from '../../context/asset.context'
 // import {ListingContext} from '../../context/listing.context'
 import {OpenseaContext} from '../context/opensea.context'
@@ -24,7 +24,11 @@ function Details () {
       authenticate, 
     } = useContext(OpenseaContext)
     
+    const [amount, setAmount] = useState(0)
+
     const handleOrder = async () => {
+      if(!amount) return alert("Amount is required")
+
       await createBuyOrder()
       await getOrder()
       await getAsset()
@@ -90,12 +94,12 @@ function Details () {
             <div className="modal-body">
               <header className="sc-1xf18x6-0 sc-xyql9f-3 eimawt cmYDzE">
                 <h4 className="sc-1xf18x6-0 sc-1w94ul3-0 sc-xyql9f-5 haVRLx bjsuxj emRahP text-center">Place a bid</h4>
-              </header>
+              </header><br/>
               <section className="sc-1xf18x6-0 sc-xyql9f-2 jpQsNF NmbCx">
                 <div className="sc-1xf18x6-0 sc-1twd32i-0 sc-1wwz3hp-0 haVRLx kKpYwv kuGBEl sc-1fkdq1o-1 UPKyL">
                   <div className="sc-1xf18x6-0 sc-1twd32i-0 jvONNN kKpYwv">
-                    <div className="sc-1xf18x6-0 sc-1twd32i-0 sc-1wwz3hp-0 gfbErs kKpYwv kuGBEl">
-                      <label className="sc-1xf18x6-0 sc-1w94ul3-0 sc-5y2dd1-0 haVRLx jnCfKq EDtcj">Price</label>
+                    <div className="sc-1xf18x6-0 sc-1twd32i-0 sc-1wwz3hp-0 gfbErs kKpYwv kuGBEl d-block">
+                      <label className="sc-1xf18x6-0 sc-1w94ul3-0 sc-5y2dd1-0 haVRLx jnCfKq EDtcj text-center">Price</label>
                     </div>
                     <div className="sc-1m1dfwq-0 eNinak">
                       <div className="sc-8qscmp-0 jVimYV">
@@ -105,7 +109,7 @@ function Details () {
                               <div className="sc-1xf18x6-0 sc-1twd32i-0 haVRLx kKpYwv PaymentTokenInputV2--payment-asset PaymentTokenInputV2--input-left">
                                 <div className="sc-1xf18x6-0 sc-1twd32i-0 sc-12mizad-0 iQOhGx kKpYwv">
                                   <div size="24" className="sc-1xf18x6-0 sc-1twd32i-0 sc-1wwz3hp-0 sc-b4hiel-0 sc-cjf6mn-0 sc-sbw25j-0 sc-s8gv83-0 fhVUfN kKpYwv kuGBEl iVtKaT euUQqP jwEsBT bLwasA">
-                                    <img alt="" src="https://openseauserdata.com/files/accae6b6fb3888cbff27a013729c22dc.svg" size="18" className="sc-1xf18x6-0 sc-sbw25j-1 fhVUfN kGXfai"/>
+                                    <img alt="" src="https://openseauserdata.com/files/accae6b6fb3888cbff27a013729c22dc.svg" size="15" className="sc-1xf18x6-0 sc-sbw25j-1 fhVUfN kGXfai"/>
                                   </div>
                                 </div>
                                 <div className="sc-1xf18x6-0 sc-1twd32i-0 sc-1wwz3hp-0 sc-b4hiel-0 sc-1idymv7-1 haVRLx kKpYwv kuGBEl iVtKaT cjftsJ">
