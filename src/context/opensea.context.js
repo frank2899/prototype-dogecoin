@@ -77,7 +77,7 @@ const OpenseaProvider = (props) => {
   
     // Create Buy order
     const createBuyOrder = async(amount) => {
-      if(!amount) return "Amount is required."
+      if(!amount) return alert("Amount is required.")
       if(!asset) return alert("You must select an asset!")
       if(!isAuthenticated) return authenticate()
       try{
