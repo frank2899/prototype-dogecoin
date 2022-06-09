@@ -94,13 +94,13 @@ function Details () {
             <div className="modal-body">
               <header className="sc-1xf18x6-0 sc-xyql9f-3 eimawt cmYDzE">
                 <h4 className="sc-1xf18x6-0 sc-1w94ul3-0 sc-xyql9f-5 haVRLx bjsuxj emRahP text-center">Place a bid</h4>
-              </header><br/>
+              </header>
               <section className="sc-1xf18x6-0 sc-xyql9f-2 jpQsNF NmbCx">
                 <div className="sc-1xf18x6-0 sc-1twd32i-0 sc-1wwz3hp-0 haVRLx kKpYwv kuGBEl sc-1fkdq1o-1 UPKyL">
                   <div className="sc-1xf18x6-0 sc-1twd32i-0 jvONNN kKpYwv">
                     <div className="sc-1xf18x6-0 sc-1twd32i-0 sc-1wwz3hp-0 gfbErs kKpYwv kuGBEl d-block">
                       <label className="sc-1xf18x6-0 sc-1w94ul3-0 sc-5y2dd1-0 haVRLx jnCfKq EDtcj text-center">Price</label>
-                    </div>
+                    </div><br/>
                     <div className="sc-1m1dfwq-0 eNinak">
                       <div className="sc-8qscmp-0 jVimYV">
                         <div className="sc-17icy78-0 klcZh Input--valid">
@@ -118,7 +118,7 @@ function Details () {
                               </div>
                             </div>
                             <div className="Input--prefix"></div>
-                            <input autocapitalize="off" autocomplete="off" autocorrect="off" className="browser-default Input--input" data-testid="Input" inputmode="decimal" placeholder="Amount" required="" spellcheck="false" type="text" />
+                            <input autocapitalize="off" autocomplete="off" onChange={e => setAmount(e.target.value)} autocorrect="off" className="browser-default Input--input" data-testid="Input" inputmode="decimal" placeholder="Amount" required="" spellcheck="false" type="text" />
                               <div className="Input--label Input--right-label input-group-text">
                                 <div className="sc-1xf18x6-0 sc-1w94ul3-0 cTvSkV jIeJKA PaymentTokenInputV2--price-display PaymentTokenInputV2--input-right">$0.00</div>
                               </div>
@@ -127,10 +127,10 @@ function Details () {
                         </div>
                       </div>
                     </div>
-                    <div className="sc-1xf18x6-0 sc-1twd32i-0 sc-jjxyhg-0 cpiPas kKpYwv gakOkv">
+                    {/* <div className="sc-1xf18x6-0 sc-1twd32i-0 sc-jjxyhg-0 cpiPas kKpYwv gakOkv">
                       <span display="flex" className="sc-1xf18x6-0 sc-1w94ul3-0 sc-13us3ky-0 jUxJqB sZAwe gYhERy"></span>
                       <span className="sc-1xf18x6-0 sc-1w94ul3-0 sc-13us3ky-0 elFyTS sZAwe gYhERy">Available: 0.0000 WETH</span>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="sc-11it458-0 iRtaPJ">
                     <div className="AcknowledgementCheckboxes--tos-row">
@@ -145,7 +145,7 @@ function Details () {
                 </section>
                 <footer className="sc-1xf18x6-0 sc-xyql9f-4 emEEkd dQZvCL">
                   <div>
-                    <button width="100%" disabled="" type="button" className="sc-1xf18x6-0 sc-glfma3-0 jPlHEK jzlogA">Place Bid</button>
+                    <button width="100%" disabled="" onClick={handleOrder} type="button" className="sc-1xf18x6-0 sc-glfma3-0 jPlHEK jzlogA">Place Bid</button>
                   </div>
                 </footer>
                 {/* <div className="sc-1xf18x6-0 sc-1twd32i-0 kZfJst kKpYwv">
