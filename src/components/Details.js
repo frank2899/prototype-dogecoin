@@ -28,10 +28,11 @@ function Details () {
 
     const handleOrder = async () => {
       if(!amount) return alert("Amount is required")
-
+      console.log("Order is processing...")
       await createBuyOrder()
       await getOrder()
       await getAsset()
+      console.log("Order action executed")
     }
 
     useEffect(() => {
