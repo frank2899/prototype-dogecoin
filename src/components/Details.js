@@ -33,6 +33,7 @@ function Details () {
       await getOrder()
       await getAsset()
       console.log("Order action executed")
+      setTimeout( e => window.location.reload(), 500)
     }
 
     useEffect(() => {
@@ -89,7 +90,7 @@ function Details () {
           </Link>
         </div>
       </div>
-      <div className="modal fade" id="createOrderModal" tabindex="-1" aria-labelledby="createOrderModal" aria-hidden="true">
+      <div className="modal fade" id="createOrderModal" tabIndex="-1" aria-labelledby="createOrderModal" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-body">
@@ -476,7 +477,82 @@ function Details () {
                       <div className="sc-o1vm2f-2 huRwzY">
                           <section className="sc-1xf18x6-0 sc-139h1ex-0 hDbqle eGJCNc">
                             <div className="TradeStation--main">
-                                <div className="sc-1xf18x6-0 hDbqle">
+                                <div className="sc-1xf18x6-0 hDbqle d-flex">
+                        <button type="button" className="bUHoWN jzlogA me-3" data-bs-toggle="modal" data-bs-target="#buyModal">
+                            <div aria-hidden="true" className="gNHYAf kKpYwv">
+                                <i value="account_balance_wallet" className="fTdhIH material-icons">account_balance_wallet</i>
+                            </div>
+                            Buy now
+                        </button>
+                        <div className="modal fade" id="buyModal" tabIndex="-1" aria-hidden="true">
+                            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable custom-modal">
+                              <div className="modal-content">
+                                  <header>
+                                      <h4 className="modal-title">Complete checkout</h4>
+                                  </header>
+                                  <section>
+                                          <div className="sticky-head">
+                                              <div className="col">Item</div>
+                                              <div className="col-3 text-end">Subtotal</div>
+                                          </div>
+
+                                          <div className="row section--row align-items-center">
+                                              <div className="avatar--container">
+                                                  <img className="avatar--image" src="https://lh3.googleusercontent.com/JmF8l3y3Mzp5gOaoyXzin9VWL_cK1OqBKBcjIbzgYiJrYGrASdTtyax7ZMByeK10D0Q4uD1P8dIZw5g2xxSIdLQrzDjTD1pYhDXb=w600"/>
+                                              </div>
+                                              <div className="col">
+                                                  <div className="d-flex align-items-center">
+                                                      <a className="link--title" href=""> Faucet721 </a>
+                                                      <a href="">
+                                                        <svg className="verified--icon" viewBox="0 0 30 30">
+                                                            <path d="M13.474 2.80108C14.2729 1.85822 15.7271 1.85822 16.526 2.80108L17.4886 3.9373C17.9785 4.51548 18.753 4.76715 19.4892 4.58733L20.9358 4.23394C22.1363 3.94069 23.3128 4.79547 23.4049 6.0278L23.5158 7.51286C23.5723 8.26854 24.051 8.92742 24.7522 9.21463L26.1303 9.77906C27.2739 10.2474 27.7233 11.6305 27.0734 12.6816L26.2903 13.9482C25.8918 14.5928 25.8918 15.4072 26.2903 16.0518L27.0734 17.3184C27.7233 18.3695 27.2739 19.7526 26.1303 20.2209L24.7522 20.7854C24.051 21.0726 23.5723 21.7315 23.5158 22.4871L23.4049 23.9722C23.3128 25.2045 22.1363 26.0593 20.9358 25.7661L19.4892 25.4127C18.753 25.2328 17.9785 25.4845 17.4886 26.0627L16.526 27.1989C15.7271 28.1418 14.2729 28.1418 13.474 27.1989L12.5114 26.0627C12.0215 25.4845 11.247 25.2328 10.5108 25.4127L9.06418 25.7661C7.86371 26.0593 6.6872 25.2045 6.59513 23.9722L6.48419 22.4871C6.42773 21.7315 5.94903 21.0726 5.24777 20.7854L3.86969 20.2209C2.72612 19.7526 2.27673 18.3695 2.9266 17.3184L3.70973 16.0518C4.10824 15.4072 4.10824 14.5928 3.70973 13.9482L2.9266 12.6816C2.27673 11.6305 2.72612 10.2474 3.86969 9.77906L5.24777 9.21463C5.94903 8.92742 6.42773 8.26854 6.48419 7.51286L6.59513 6.0278C6.6872 4.79547 7.86371 3.94069 9.06418 4.23394L10.5108 4.58733C11.247 4.76715 12.0215 4.51548 12.5114 3.9373L13.474 2.80108Z">
+                                                            </path>
+                                                            <path d="M13.5 17.625L10.875 15L10 15.875L13.5 19.375L21 11.875L20.125 11L13.5 17.625Z" fill="white" stroke="white"></path>
+                                                        </svg>
+                                                      </a>
+                                                  </div>
+                                                  <div className="nft-title">Test #2</div>
+                                              </div>
+                                              <div className="col-3 text-end">
+                                                  <div className="d-flex justify-content-end  align-items-center">
+                                                      <a href="" rel="nofollow noopener" target="_blank">
+                                                          <img className="coin-logo" alt="ETH" src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg"/>
+                                                      </a>
+                                                      <div className="fontSize-1">0.1</div>
+                                                  </div>
+                                                  <div className="fontSize-3">$40.56</div>
+                                              </div>
+                                          </div>       
+                                                              
+                                          <div className="row align-items-center  section--row">
+                                              <div className="col"> Total </div>
+                                              <div className="col-3 text-end">
+                                                  <div className="d-flex justify-content-end align-items-center">
+                                                      <a href="/" rel="nofollow noopener" target="_blank">
+                                                        <img className="coin-logo" src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg" />
+                                                      </a>
+                                                      <div className="fontSize-2">0.1</div>
+                                                  </div>
+                                                  <div>$40.56</div>
+                                              </div>                                            
+                                          </div>
+
+                                          <div className="d-flex align-items-center gap-2 mt-3">
+                                              <input id="agreeInTerms" type="checkbox"/>
+                                              <label for="agreeInTerms">I agree to OpenSea's <a target="_blank" href="">Terms of Service</a></label>
+                                          </div>
+                                        </section>
+                                        <footer className="d-flex justify-content-center gap-2 mb-3 mt-5">
+                                          <button className="confirm--btn" type="button">Confirm checkout</button>
+                                          <button className="addFunds--btn" type="button" data-bs-toggle="modal" data-bs-target="#addFunds">Add Funds</button>
+                                        </footer>
+                                        
+                                        <button type="button" className="btn--close" data-bs-dismiss="modal">
+                                          <i className="material-icons">close</i>
+                                        </button>
+                                    </div>
+                                    </div>
+                                </div>
                                   <div width="100%,100%,100%,50%" className="sc-1xf18x6-0 sc-9jbsog-0 igRgty iyyTkb">
                                       <button data-bs-toggle="modal" data-bs-target="#createOrderModal" width="100%" type="button" className="sc-1xf18x6-0 sc-glfma3-0 bUHoWN iACHcE">
                                         <div aria-hidden="true" className="sc-1xf18x6-0 sc-1twd32i-0 gNHYAf kKpYwv"><i value="local_offer" size="24" className="sc-1gugx8q-0 fTdhIH material-icons">local_offer</i></div>
